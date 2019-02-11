@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="400.0" prefWidth="600.0" fx:controller="de.codecentric.dk.MainAppInterfaceController">
+    <center>
+        <HBox alignment="CENTER"  prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="start" mnemonicParsing="false" text="Start">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button fx:id="pause" mnemonicParsing="false" text="Pause">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+                <Button fx:id="resume" mnemonicParsing="false" text="Resume">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Button>
+            </children>
+        </HBox>
+    </center>
+    <top>
+        <Label fx:id="statusLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Status : [ Stopped ]" BorderPane.alignment="CENTER"/>
+    </top>
+    <bottom>
+        <TextArea fx:id="infoArea" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="..information area" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </BorderPane.margin>
+        </TextArea>
+    </bottom>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+    </padding>
+</BorderPane>

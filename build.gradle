@@ -1,0 +1,28 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+}
+
+
+dependencies {
+    implementation 'edu.cmu.sphinx:sphinx4-core:5prealpha-SNAPSHOT'
+    implementation 'edu.cmu.sphinx:sphinx4-data:5prealpha-SNAPSHOT'
+    implementation 'org.controlsfx:controlsfx:9.0.0'
+    implementation 'de.jensd:fontawesomefx:8.9'
+    testCompile "org.testfx:testfx-core:4.0.15-alpha"
+    testCompile 'org.testfx:testfx-spock:4.0.15-alpha'
+}
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+mainClassName = 'de.codecentric.dk.MainApp'
