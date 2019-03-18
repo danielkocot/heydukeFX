@@ -6,6 +6,7 @@ plugins {
 repositories {
     mavenLocal()
     mavenCentral()
+    jcenter()
     maven {
         url "https://oss.sonatype.org/content/repositories/snapshots"
     }
@@ -15,6 +16,7 @@ repositories {
 dependencies {
     implementation 'edu.cmu.sphinx:sphinx4-core:5prealpha-SNAPSHOT'
     implementation 'edu.cmu.sphinx:sphinx4-data:5prealpha-SNAPSHOT'
+    implementation 'de.dfki.mary:voice-cmu-slt-hsmm:5.2'
     implementation 'org.controlsfx:controlsfx:9.0.0'
     implementation 'de.jensd:fontawesomefx:8.9'
     testCompile "org.testfx:testfx-core:4.0.15-alpha"

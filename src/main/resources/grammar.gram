@@ -1,0 +1,6 @@
+#JSGF V1.0;
+
+grammar grammar;
+
+public <feelings> = ( how are you | say hello );
+public <amazing>  = ( say amazing | what day is today );
