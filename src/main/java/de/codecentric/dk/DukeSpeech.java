@@ -3,7 +3,6 @@ package de.codecentric.dk;
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import edu.cmu.sphinx.api.SpeechResult;
-import marytts.modules.synthesis.Voice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +43,7 @@ public class DukeSpeech {
             e.printStackTrace();
         }
 
-        Voice.getAvailableVoices().stream().forEach(voice -> logger.info("Voice: " + voice));
+        textToSpeech.getAvailableVoices().stream().forEach(voice -> logger.info("Voice: " + voice));
         textToSpeech.setVoice("cmu-slt-hsmm");
 
         startSpeechThread();
