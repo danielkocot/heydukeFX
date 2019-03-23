@@ -3,7 +3,6 @@ package de.codecentric.dk;
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.LiveSpeechRecognizer;
 import edu.cmu.sphinx.api.SpeechResult;
-import edu.cmu.sphinx.result.WordResult;
 import marytts.modules.synthesis.Voice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,15 +10,13 @@ import org.slf4j.LoggerFactory;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Port;
 import java.io.IOException;
-import java.util.List;
+import java.util.Calendar;
 
 public class DukeSpeech {
 
     TextToSpeech textToSpeech = new TextToSpeech();
 
     private Logger logger = LoggerFactory.getLogger(getClass().getName());
-
-    private String result;
 
     Thread speechThread;
     Thread resourcesThread;
@@ -37,7 +34,7 @@ public class DukeSpeech {
         configuration.setAcousticModelPath("resource:/edu/cmu/sphinx/models/en-us/en-us");
         configuration.setDictionaryPath("resource:/edu/cmu/sphinx/models/en-us/cmudict-en-us.dict");
 
-        configuration.setGrammarPath("resource:/grammars");
+        configuration.setGrammarPath("resource:/grammar");
         configuration.setGrammarName("grammar");
         configuration.setUseGrammar(true);
 
@@ -50,6 +47,7 @@ public class DukeSpeech {
         Voice.getAvailableVoices().stream().forEach(voice -> logger.info("Voice: " + voice));
         textToSpeech.setVoice("cmu-slt-hsmm");
 
+        startSpeechThread();
         speechRecognizer.startRecognition(true);
         startResourcesThread();
     }
@@ -67,8 +65,7 @@ public class DukeSpeech {
                 while (!recognizerStopped) {
                     SpeechResult speechResult = speechRecognizer.getResult();
                     if (speechResult != null) {
-                        result = speechResult.getHypothesis();
-                        makeDecision(result, speechResult.getWords());
+                        makeDecision(speechResult.getHypothesis());
                     }
                 }
             } catch (Exception e) {
@@ -107,9 +104,18 @@ public class DukeSpeech {
         });
     }
 
-    private void makeDecision(String speech, List<WordResult> words) {
-        if (speech.contentEquals("how are you")) {
+    private void makeDecision(String speech) {
+        if (speech.contentEquals("say hello")) {
+            textToSpeech.speak("Hello Daniel", false, true);
+        } else if (speech.contentEquals("how are you")) {
             textToSpeech.speak("Fine Thanks", false, true);
+        } else if (speech.contentEquals("say amazing")) {
+            textToSpeech.speak("Amazing", false, true);
+        } else if (speech.contentEquals("what day is today")) {
+            String[] strDays = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thusday",
+                    "Friday", "Saturday" };
+            Calendar calendar = Calendar.getInstance();
+            textToSpeech.speak(strDays[calendar.get(Calendar.DAY_OF_WEEK)- 1], false, true);
         }
     }
 }

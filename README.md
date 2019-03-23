@@ -1,2 +1,2 @@
 # heydukeFX
-Source for the talk "Hey Duke, let's talk..."
+Source for the talk and article "Hey Duke, let's talk..."

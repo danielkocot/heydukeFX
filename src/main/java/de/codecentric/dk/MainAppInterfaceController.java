@@ -26,18 +26,18 @@ public class MainAppInterfaceController extends BorderPane {
     private DukeSpeech dukeSpeech = new DukeSpeech();
 
 
-
     @FXML
     private void initialize() {
 
         start.setOnAction(a -> {
            statusLabel.setText("Status : [Running]");
-           infoArea.appendText("Start Speech Recognizer\n");
-           dukeSpeech.startResourcesThread();
+           infoArea.appendText("Speech Recognizer started\n");
+           dukeSpeech.startSpeechThread();
         });
 
         stop.setOnAction(a -> {
-            statusLabel.setText("Status : [Paused]");
+            statusLabel.setText("Status : [Stopped]");
+            infoArea.appendText("Speech Recognizer stopped\n");
             dukeSpeech.stopSpeechThread();
         });
 
