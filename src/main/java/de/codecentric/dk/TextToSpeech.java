@@ -6,25 +6,26 @@ import marytts.exceptions.MaryConfigurationException;
 import marytts.exceptions.SynthesisException;
 import marytts.modules.synthesis.Voice;
 import marytts.util.data.audio.AudioPlayer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sound.sampled.AudioInputStream;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class TextToSpeech {
 
+    private Logger logger = LoggerFactory.getLogger(getClass().getName());
+
     private AudioPlayer audioPlayer;
     private MaryInterface marytts;
-
 
     public TextToSpeech() {
         try {
             marytts = new LocalMaryInterface();
         } catch (MaryConfigurationException e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+            logger.debug("Exception thrown", e);
         }
     }
 
@@ -50,11 +51,11 @@ public class TextToSpeech {
             if (join)
                 audioPlayer.join();
         } catch (SynthesisException e) {
-            Logger.getLogger(getClass().getName()).log(Level.WARNING, "Error saying phrase.", e);
+            logger.warn("Error saying phrase.", e);
         } catch (IOException e) {
-            Logger.getLogger(getClass().getName()).log(Level.WARNING, "IO Exception", e);
+            logger.warn("IO Exception", e);
         } catch (InterruptedException e) {
-            Logger.getLogger(getClass().getName()).log(Level.WARNING, "Interrupted ", e);
+            logger.warn("Interrupted ", e);
         }
     }
 }
